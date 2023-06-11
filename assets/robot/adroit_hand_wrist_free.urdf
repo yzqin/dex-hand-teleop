@@ -1,0 +1,754 @@
+<?xml version="0.0" ?>
+<robot name="Adroit">
+  <link name="root">
+    <inertial>
+      <origin rpy="-0.03143 -0.00602 -0.37822" xyz="0.00100 -0.00200 0.29000"/>
+      <mass value="4.00000"/>
+      <inertia ixx="0.05139" ixy="0" ixz="0" iyy="0.05015" iyz="0" izz="0.04715"/>
+    </inertial>
+  </link>
+  <link name="root1">
+    <inertial>
+      <mass value="0.01"/>
+      <inertia ixx="1e-4" ixy="0.0" ixz="0.0" iyy="1e-4" iyz="0.0" izz="1e-4"/>
+    </inertial>
+  </link>
+  <link name="root2">
+    <inertial>
+      <mass value="0.01"/>
+      <inertia ixx="1e-4" ixy="0.0" ixz="0.0" iyy="1e-4" iyz="0.0" izz="1e-4"/>
+    </inertial>
+  </link>
+  <link name="root3">
+    <inertial>
+      <mass value="0.01"/>
+      <inertia ixx="1e-4" ixy="0.0" ixz="0.0" iyy="1e-4" iyz="0.0" izz="1e-4"/>
+    </inertial>
+  </link>
+  <link name="root4">
+    <inertial>
+      <mass value="0.01"/>
+      <inertia ixx="1e-4" ixy="0.0" ixz="0.0" iyy="1e-4" iyz="0.0" izz="1e-4"/>
+    </inertial>
+  </link>
+  <link name="root5">
+    <inertial>
+      <mass value="0.01"/>
+      <inertia ixx="1e-4" ixy="0.0" ixz="0.0" iyy="1e-4" iyz="0.0" izz="1e-4"/>
+    </inertial>
+  </link>
+
+  <joint name="x_joint" type="prismatic">
+    <parent link="root"/>
+    <child link="root1"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-5" upper="5"/>
+  </joint>
+  <joint name="y_joint" type="prismatic">
+    <parent link="root1"/>
+    <child link="root2"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-5" upper="5"/>
+  </joint>
+  <joint name="z_joint" type="prismatic">
+    <parent link="root2"/>
+    <child link="root3"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-5" upper="5"/>
+  </joint>
+  <joint name="x_rotation_joint" type="revolute">
+    <parent link="root3"/>
+    <child link="root4"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-3.14" upper="3.14"/>
+  </joint>
+  <joint name="y_rotation_joint" type="revolute">
+    <parent link="root4"/>
+    <child link="root5"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-3.14" upper="3.14"/>
+  </joint>
+  <joint name="z_rotation_joint" type="revolute">
+    <parent link="root5"/>
+    <child link="forearm"/>
+    <axis xyz="0 0 1"/>
+    <origin rpy="-0.00000 -0.00000 1.57079" xyz="0 0 0"/>
+    <limit lower="-3.14" upper="3.14"/>
+  </joint>
+
+  <link name="forearm">
+    <inertial>
+      <origin rpy="-0.03143 -0.00602 -0.37822" xyz="0.00100 -0.00200 0.29000"/>
+      <mass value="4.00000"/>
+      <inertia ixx="0.05139" ixy="0" ixz="0" iyy="0.05015" iyz="0" izz="0.04715"/>
+    </inertial>
+    <visual>
+      <origin rpy="0.00000 -0.00000 -1.57000" xyz="-0.00000 -0.01000 0.18100"/>
+      <geometry>
+        <mesh filename="adroit_hand_description/meshes/forearm_simple.stl" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.29000"/>
+      <geometry>
+        <capsule length="0.06600" radius="0.05000"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="wrist">
+    <inertial>
+      <origin rpy="1.55379 -0.00101 1.56980" xyz="0.00300 0.00000 0.01600"/>
+      <mass value="0.30000"/>
+      <inertia ixx="203.50260" ixy="0" ixz="0" iyy="138.62010" iyz="0" izz="112.95440"/>
+    </inertial>
+    <visual>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="-0.00000 -0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="adroit_hand_description/meshes/wrist.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="1.57080 -0.00000 -0.00000" xyz="-0.00000 -0.00000 0.00000"/>
+      <geometry>
+        <capsule length="0.02000" radius="0.01500"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="WRJ1" type="revolute">
+    <parent link="forearm"/>
+    <child link="wrist"/>
+    <limit effort="0" lower="-0.524" upper="0.175" velocity="0"/>
+    <dynamics damping="1.0" friction="0.0001"/>
+    <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.39600"/>
+    <axis xyz="0.00000 1.00000 0.00000"/>
+  </joint>
+  <joint name="WRJ0" type="revolute">
+    <parent link="wrist"/>
+    <child link="palm"/>
+    <dynamics damping="1.0" friction="0.0001"/>
+    <limit effort="0" lower="-0.785" upper="0.611" velocity="0"/>
+    <origin rpy="-0.00000 0.00000 -0.00000" xyz="0.00000 0.00000 0.03400"/>
+    <axis xyz="1.00000 0.00000 0.00000"/>
+  </joint>
+
+  <link name="palm">
+    <inertial>
+      <origin rpy="0.16785 0.04641 1.54206" xyz="0.00600 0.00000 0.03600"/>
+      <mass value="0.30000"/>
+      <inertia ixx="700.28312" ixy="0" ixz="0" iyy="475.06938" iyz="0" izz="314.44362"/>
+    </inertial>
+    <visual>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="-0.00000 -0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="adroit_hand_description/meshes/palm.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.01100 0.00000 0.03800"/>
+      <geometry>
+        <box size="0.06400 0.02220 0.09800"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="-0.03200 -0.00000 0.01400"/>
+      <geometry>
+        <box size="0.02200 0.02220 0.05000"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="ffknuckle">
+    <inertial>
+      <origin rpy="2.04776 0.01137 0.00713" xyz="0.00000 0.00000 0.00000"/>
+      <mass value="0.00800"/>
+      <inertia ixx="0.77520" ixy="0" ixz="0" iyy="0.49146" iyz="0" izz="0.48926"/>
+    </inertial>
+    <visual>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="adroit_hand_description/meshes/knuckle.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="ffproximal">
+    <inertial>
+      <origin rpy="-0.00000 0.01132 1.57080" xyz="0.00000 0.00000 0.02300"/>
+      <mass value="0.01400"/>
+      <inertia ixx="4.70136" ixy="0" ixz="0" iyy="4.64128" iyz="0" izz="0.88127"/>
+    </inertial>
+    <visual>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+      <geometry>
+        <mesh filename="adroit_hand_description/meshes/F3.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.02250"/>
+      <geometry>
+        <capsule length="0.04500" radius="0.01000"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="ffmiddle">
+    <inertial>
+      <origin rpy="0.00000 -0.00000 1.57080" xyz="0.00000 0.00000 0.01100"/>
+      <mass value="0.01200"/>
+      <inertia ixx="1.92818" ixy="0" ixz="0" iyy="1.89149" iyz="0" izz="0.61726"/>
+    </inertial>
+    <visual>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="adroit_hand_description/meshes/F2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.01250"/>
+      <geometry>
+        <capsule length="0.02500" radius="0.00805"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="ffdistal">
+    <inertial>
+      <origin rpy="-0.00000 0.00849 1.57080" xyz="0.00000 0.00000 0.01500"/>
+      <mass value="0.01000"/>
+      <inertia ixx="1.04965" ixy="0" ixz="0" iyy="0.97066" iyz="0" izz="0.44607"/>
+    </inertial>
+    <visual>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 -0.00000 0.00100"/>
+      <geometry>
+        <mesh filename="adroit_hand_description/meshes/F1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 -0.00000 0.01200"/>
+      <geometry>
+        <capsule length="0.02400" radius="0.00705"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="mfknuckle">
+    <inertial>
+      <origin rpy="2.04776 0.01137 0.00713" xyz="0.00000 0.00000 0.00000"/>
+      <mass value="0.00800"/>
+      <inertia ixx="0.77520" ixy="0" ixz="0" iyy="0.49146" iyz="0" izz="0.48926"/>
+    </inertial>
+    <visual>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="adroit_hand_description/meshes/knuckle.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="mfproximal">
+    <inertial>
+      <origin rpy="-0.00000 0.01132 1.57080" xyz="0.00000 0.00000 0.02300"/>
+      <mass value="0.01400"/>
+      <inertia ixx="4.70136" ixy="0" ixz="0" iyy="4.64128" iyz="0" izz="0.88127"/>
+    </inertial>
+    <visual>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+      <geometry>
+        <mesh filename="adroit_hand_description/meshes/F3.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.02250"/>
+      <geometry>
+        <capsule length="0.04500" radius="0.01000"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="mfmiddle">
+    <inertial>
+      <origin rpy="0.00000 -0.00000 1.57080" xyz="0.00000 0.00000 0.01200"/>
+      <mass value="0.01200"/>
+      <inertia ixx="1.92818" ixy="0" ixz="0" iyy="1.89149" iyz="0" izz="0.61726"/>
+    </inertial>
+    <visual>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="adroit_hand_description/meshes/F2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.01250"/>
+      <geometry>
+        <capsule length="0.02500" radius="0.00805"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="mfdistal">
+    <inertial>
+      <origin rpy="-0.00000 0.00849 1.57080" xyz="0.00000 0.00000 0.01500"/>
+      <mass value="0.01000"/>
+      <inertia ixx="1.04965" ixy="0" ixz="0" iyy="0.97066" iyz="0" izz="0.44607"/>
+    </inertial>
+    <visual>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="adroit_hand_description/meshes/F1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 -0.00000 0.01200"/>
+      <geometry>
+        <capsule length="0.02400" radius="0.00705"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="rfknuckle">
+    <inertial>
+      <origin rpy="2.04776 0.01137 0.00713" xyz="0.00000 0.00000 0.00000"/>
+      <mass value="0.00800"/>
+      <inertia ixx="0.77520" ixy="0" ixz="0" iyy="0.49146" iyz="0" izz="0.48926"/>
+    </inertial>
+    <visual>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="adroit_hand_description/meshes/knuckle.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="rfproximal">
+    <inertial>
+      <origin rpy="-0.00000 0.01132 1.57080" xyz="0.00000 0.00000 0.02300"/>
+      <mass value="0.01400"/>
+      <inertia ixx="4.70136" ixy="0" ixz="0" iyy="4.64128" iyz="0" izz="0.88127"/>
+    </inertial>
+    <visual>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+      <geometry>
+        <mesh filename="adroit_hand_description/meshes/F3.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.02250"/>
+      <geometry>
+        <capsule length="0.04500" radius="0.01000"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="rfmiddle">
+    <inertial>
+      <origin rpy="0.00000 -0.00000 1.57080" xyz="0.00000 0.00000 0.01200"/>
+      <mass value="0.01200"/>
+      <inertia ixx="1.92818" ixy="0" ixz="0" iyy="1.89149" iyz="0" izz="0.61726"/>
+    </inertial>
+    <visual>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="adroit_hand_description/meshes/F2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.01250"/>
+      <geometry>
+        <capsule length="0.02500" radius="0.00805"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="rfdistal">
+    <inertial>
+      <origin rpy="-0.00000 0.00849 1.57080" xyz="0.00000 0.00000 0.01500"/>
+      <mass value="0.01000"/>
+      <inertia ixx="1.04965" ixy="0" ixz="0" iyy="0.97066" iyz="0" izz="0.44607"/>
+    </inertial>
+    <visual>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 -0.00000 0.00100"/>
+      <geometry>
+        <mesh filename="adroit_hand_description/meshes/F1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 -0.00000 0.01200"/>
+      <geometry>
+        <capsule length="0.02400" radius="0.00705"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="lfmetacarpal">
+    <inertial>
+      <origin rpy="-0.22019 0.03876 1.54801" xyz="-0.01400 0.00100 0.01400"/>
+      <mass value="0.07500"/>
+      <inertia ixx="58.91810" ixy="0" ixz="0" iyy="45.72837" iyz="0" izz="21.82452"/>
+    </inertial>
+    <visual>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="-0.01600 -0.00000 -0.02300"/>
+      <geometry>
+        <mesh filename="adroit_hand_description/meshes/lfmetacarpal.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="-0.01650 0.00000 0.01000"/>
+      <geometry>
+        <box size="0.01900 0.02220 0.05000"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="lfknuckle">
+    <inertial>
+      <origin rpy="2.04776 0.01137 0.00713" xyz="0.00000 0.00000 0.00000"/>
+      <mass value="0.00800"/>
+      <inertia ixx="0.77520" ixy="0" ixz="0" iyy="0.49146" iyz="0" izz="0.48926"/>
+    </inertial>
+    <visual>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="adroit_hand_description/meshes/knuckle.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="lfproximal">
+    <inertial>
+      <origin rpy="-0.00000 0.01132 1.57080" xyz="0.00000 0.00000 0.02300"/>
+      <mass value="0.01400"/>
+      <inertia ixx="4.70136" ixy="0" ixz="0" iyy="4.64128" iyz="0" izz="0.88127"/>
+    </inertial>
+    <visual>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+      <geometry>
+        <mesh filename="adroit_hand_description/meshes/F3.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.02250"/>
+      <geometry>
+        <capsule length="0.04500" radius="0.01000"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="lfmiddle">
+    <inertial>
+      <origin rpy="0.00000 -0.00000 1.57080" xyz="0.00000 0.00000 0.01200"/>
+      <mass value="0.01200"/>
+      <inertia ixx="1.92818" ixy="0" ixz="0" iyy="1.89149" iyz="0" izz="0.61726"/>
+    </inertial>
+    <visual>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="adroit_hand_description/meshes/F2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.01250"/>
+      <geometry>
+        <capsule length="0.02500" radius="0.00805"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="lfdistal">
+    <inertial>
+      <origin rpy="-0.00000 0.00849 1.57080" xyz="0.00000 0.00000 0.01500"/>
+      <mass value="0.01000"/>
+      <inertia ixx="1.04965" ixy="0" ixz="0" iyy="0.97066" iyz="0" izz="0.44607"/>
+    </inertial>
+    <visual>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 -0.00000 0.00100"/>
+      <geometry>
+        <mesh filename="adroit_hand_description/meshes/F1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 -0.00000 0.01200"/>
+      <geometry>
+        <capsule length="0.02400" radius="0.00705"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="thbase">
+    <inertial>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <mass value="0.01000"/>
+      <inertia ixx="0.00000" ixy="0" ixz="0" iyy="0.00000" iyz="0" izz="0.00000"/>
+    </inertial>
+    <collision>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <geometry>
+        <box size="0.00200 0.00200 0.00200"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="thproximal">
+    <inertial>
+      <origin rpy="0.00038 0.00196 0.38421" xyz="0.00000 0.00000 0.01700"/>
+      <mass value="0.01600"/>
+      <inertia ixx="6.48456" ixy="0" ixz="0" iyy="6.47914" iyz="0" izz="3.04491"/>
+    </inertial>
+    <visual>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="-0.00000 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="adroit_hand_description/meshes/TH3_z.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 -0.00000 0.01900"/>
+      <geometry>
+        <capsule length="0.03800" radius="0.01300"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="thhub">
+    <inertial>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <mass value="0.00200"/>
+      <inertia ixx="0.00000" ixy="0" ixz="0" iyy="0.00000" iyz="0" izz="0.00000"/>
+    </inertial>
+    <collision>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <geometry>
+        <box size="0.00200 0.00200 0.00200"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="thmiddle">
+    <inertial>
+      <origin rpy="-0.00204 -0.01399 0.00601" xyz="0.00000 0.00000 0.01600"/>
+      <mass value="0.01600"/>
+      <inertia ixx="4.28057" ixy="0" ixz="0" iyy="4.29017" iyz="0" izz="1.34849"/>
+    </inertial>
+    <visual>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 -0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="adroit_hand_description/meshes/TH2_z.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.01600"/>
+      <geometry>
+        <capsule length="0.03200" radius="0.01100"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="thdistal">
+    <inertial>
+      <origin rpy="-0.01050 -0.09397 0.01050" xyz="0.00000 0.00000 0.01600"/>
+      <mass value="0.01600"/>
+      <inertia ixx="2.57867" ixy="0" ixz="0" iyy="2.57257" iyz="0" izz="1.33251"/>
+    </inertial>
+    <visual>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="adroit_hand_description/meshes/TH1_z.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.01300"/>
+      <geometry>
+        <capsule length="0.02600" radius="0.00918"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="FFJ3" type="revolute">
+    <parent link="palm"/>
+    <child link="ffknuckle"/>
+    <dynamics damping="1.0" friction="0.0001"/>
+    <limit effort="0" lower="-0.436" upper="0.436" velocity="0"/>
+    <origin rpy="0.00000 -0.00000 -0.00000" xyz="0.03300 0.00000 0.09500"/>
+    <axis xyz="0.00000 1.00000 0.00000"/>
+  </joint>
+  <joint name="FFJ2" type="revolute">
+    <parent link="ffknuckle"/>
+    <child link="ffproximal"/>
+    <dynamics damping="1.0" friction="0.0001"/>
+    <limit effort="0" lower="0" upper="1.571" velocity="0"/>
+    <origin rpy="-0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+    <axis xyz="1.00000 0.00000 0.00000"/>
+  </joint>
+  <joint name="FFJ1" type="revolute">
+    <parent link="ffproximal"/>
+    <child link="ffmiddle"/>
+    <dynamics damping="1.0" friction="0.0001"/>
+    <limit effort="0" lower="0" upper="1.571" velocity="0"/>
+    <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.04500"/>
+    <axis xyz="1.00000 0.00000 0.00000"/>
+  </joint>
+  <joint name="FFJ0" type="revolute">
+    <limit effort="0" lower="0" upper="1.571" velocity="0"/>
+    <parent link="ffmiddle"/>
+    <child link="ffdistal"/>
+    <dynamics damping="1.0" friction="0.0001"/>
+    <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.02500"/>
+    <axis xyz="1.00000 0.00000 0.00000"/>
+  </joint>
+  <joint name="MFJ3" type="revolute">
+    <limit effort="0" lower="-0.436" upper="0.436" velocity="0"/>
+    <parent link="palm"/>
+    <child link="mfknuckle"/>
+    <dynamics damping="1.0" friction="0.0001"/>
+    <origin rpy="0.00000 -0.00000 -0.00000" xyz="0.01100 0.00000 0.09900"/>
+    <axis xyz="0.00000 1.00000 0.00000"/>
+  </joint>
+  <joint name="MFJ2" type="revolute">
+    <limit effort="0" lower="0" upper="1.571" velocity="0"/>
+    <parent link="mfknuckle"/>
+    <child link="mfproximal"/>
+    <dynamics damping="1.0" friction="0.0001"/>
+    <origin rpy="-0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+    <axis xyz="1.00000 0.00000 0.00000"/>
+  </joint>
+  <joint name="MFJ1" type="revolute">
+    <limit effort="0" lower="0" upper="1.571" velocity="0"/>
+    <parent link="mfproximal"/>
+    <child link="mfmiddle"/>
+    <dynamics damping="1.0" friction="0.0001"/>
+    <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.04500"/>
+    <axis xyz="1.00000 0.00000 0.00000"/>
+  </joint>
+  <joint name="MFJ0" type="revolute">
+    <limit effort="0" lower="0" upper="1.571" velocity="0"/>
+    <parent link="mfmiddle"/>
+    <child link="mfdistal"/>
+    <dynamics damping="1.0" friction="0.0001"/>
+    <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.02500"/>
+    <axis xyz="1.00000 0.00000 0.00000"/>
+  </joint>
+  <joint name="RFJ3" type="revolute">
+    <limit effort="0" lower="-0.436" upper="0.436" velocity="0"/>
+    <parent link="palm"/>
+    <child link="rfknuckle"/>
+    <dynamics damping="1.0" friction="0.0001"/>
+    <origin rpy="0.00000 -0.00000 -0.00000" xyz="-0.01100 -0.00000 0.09500"/>
+    <axis xyz="0.00000 1.00000 0.00000"/>
+  </joint>
+  <joint name="RFJ2" type="revolute">
+    <limit effort="0" lower="0" upper="1.571" velocity="0"/>
+    <parent link="rfknuckle"/>
+    <child link="rfproximal"/>
+    <dynamics damping="1.0" friction="0.0001"/>
+    <origin rpy="-0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+    <axis xyz="1.00000 0.00000 0.00000"/>
+  </joint>
+  <joint name="RFJ1" type="revolute">
+    <limit effort="0" lower="0" upper="1.571" velocity="0"/>
+    <parent link="rfproximal"/>
+    <child link="rfmiddle"/>
+    <dynamics damping="1.0" friction="0.0001"/>
+    <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.04500"/>
+    <axis xyz="1.00000 0.00000 0.00000"/>
+  </joint>
+  <joint name="RFJ0" type="revolute">
+    <limit effort="0" lower="0" upper="1.571" velocity="0"/>
+    <parent link="rfmiddle"/>
+    <child link="rfdistal"/>
+    <dynamics damping="1.0" friction="0.0001"/>
+    <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.02500"/>
+    <axis xyz="1.00000 0.00000 0.00000"/>
+  </joint>
+  <joint name="LFJ4" type="revolute">
+    <limit effort="0" lower="0" upper="0.698" velocity="0"/>
+    <parent link="palm"/>
+    <child link="lfmetacarpal"/>
+    <dynamics damping="1.0" friction="0.0001"/>
+    <origin rpy="0.00000 -0.00000 -0.00000" xyz="-0.01700 -0.00000 0.04400"/>
+    <axis xyz="0.57098 0.00000 0.82097"/>
+  </joint>
+  <joint name="LFJ3" type="revolute">
+    <limit effort="0" lower="-0.436" upper="0.436" velocity="0"/>
+    <parent link="lfmetacarpal"/>
+    <child link="lfknuckle"/>
+    <dynamics damping="1.0" friction="0.0001"/>
+    <origin rpy="0.00000 -0.00000 0.00000" xyz="-0.01700 -0.00000 0.04400"/>
+    <axis xyz="0.00000 1.00000 0.00000"/>
+  </joint>
+  <joint name="LFJ2" type="revolute">
+    <limit effort="0" lower="0" upper="1.571" velocity="0"/>
+    <parent link="lfknuckle"/>
+    <child link="lfproximal"/>
+    <dynamics damping="1.0" friction="0.0001"/>
+    <origin rpy="-0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+    <axis xyz="1.00000 0.00000 0.00000"/>
+  </joint>
+  <joint name="LFJ1" type="revolute">
+    <limit effort="0" lower="0" upper="1.571" velocity="0"/>
+    <parent link="lfproximal"/>
+    <child link="lfmiddle"/>
+    <dynamics damping="1.0" friction="0.0001"/>
+    <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.04500"/>
+    <axis xyz="1.00000 0.00000 0.00000"/>
+  </joint>
+  <joint name="LFJ0" type="revolute">
+    <limit effort="0" lower="0" upper="1.571" velocity="0"/>
+    <parent link="lfmiddle"/>
+    <child link="lfdistal"/>
+    <dynamics damping="1.0" friction="0.0001"/>
+    <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.02500"/>
+    <axis xyz="1.00000 0.00000 0.00000"/>
+  </joint>
+  <joint name="THJ4" type="revolute">
+    <limit effort="0" lower="-1.047" upper="1.047" velocity="0"/>
+    <parent link="palm"/>
+    <child link="thbase"/>
+    <dynamics damping="1.0" friction="0.0001"/>
+    <origin rpy="-0.00000 0.78500 0.00000" xyz="0.03400 -0.00900 0.02900"/>
+    <axis xyz="0.00000 0.00000 -1.00000"/>
+  </joint>
+  <joint name="THJ3" type="revolute">
+    <limit effort="0" lower="0" upper="1.309" velocity="0"/>
+    <parent link="thbase"/>
+    <child link="thproximal"/>
+    <dynamics damping="1.0" friction="0.0001"/>
+    <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+    <axis xyz="1.00000 0.00000 0.00000"/>
+  </joint>
+  <joint name="THJ2" type="revolute">
+    <limit effort="0" lower="-0.262" upper="0.262" velocity="0"/>
+    <parent link="thproximal"/>
+    <child link="thhub"/>
+    <dynamics damping="1.0" friction="0.0001"/>
+    <origin rpy="-0.00000 -0.00000 -0.00000" xyz="-0.00000 0.00000 0.03800"/>
+    <axis xyz="1.00000 0.00000 0.00000"/>
+  </joint>
+  <joint name="THJ1" type="revolute">
+    <limit effort="0" lower="-0.524" upper="0.524" velocity="0"/>
+    <parent link="thhub"/>
+    <child link="thmiddle"/>
+    <dynamics damping="1.0" friction="0.0001"/>
+    <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+    <axis xyz="0.00000 1.00000 0.00000"/>
+  </joint>
+  <joint name="THJ0" type="revolute">
+    <limit effort="0" lower="-1.571" upper="0" velocity="0"/>
+    <parent link="thmiddle"/>
+    <child link="thdistal"/>
+    <dynamics damping="1.0" friction="0.0001"/>
+    <origin rpy="0.00000 0.00000 -0.00000" xyz="0.00000 0.00000 0.03200"/>
+    <axis xyz="0.00000 1.00000 0.00000"/>
+  </joint>
+
+  <!--Tips-->
+  <link name="thtip">
+  </link>
+  <link name="fftip">
+  </link>
+  <link name="mftip">
+  </link>
+  <link name="rftip">
+  </link>
+  <link name="lftip">
+  </link>
+  <joint name="thtip_joint" type="fixed">
+    <parent link="thdistal"/>
+    <child link="thtip"/>
+    <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.0275"/>
+  </joint>
+  <joint name="fftip_joint" type="fixed">
+    <parent link="ffdistal"/>
+    <child link="fftip"/>
+    <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.026"/>
+  </joint>
+  <joint name="mftip_joint" type="fixed">
+    <parent link="mfdistal"/>
+    <child link="mftip"/>
+    <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.026"/>
+  </joint>
+  <joint name="rftip_joint" type="fixed">
+    <parent link="rfdistal"/>
+    <child link="rftip"/>
+    <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.026"/>
+  </joint>
+  <joint name="lftip_joint" type="fixed">
+    <parent link="lfdistal"/>
+    <child link="lftip"/>
+    <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.026"/>
+  </joint>
+</robot>

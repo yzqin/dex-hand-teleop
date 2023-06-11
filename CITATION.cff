@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "Thanks for using ManiSkill2. If you use this software, please cite it as below."
+authors:
+- family-names: "Qin"
+  given-names: "Yuzhe"
+- family-names: "Su"
+  given-names: "Hao"
+- family-names: "Wang"
+  given-names: "Xiaolong"
+title: "DexPoint"
+version: 0.4.0
+date-released: 2023-04-10
+url: "https://github.com/yzqin/dex-hand-teleop"
+preferred-citation:
+  type: conference-paper
+  title: "From One Hand to Multiple Hands: Imitation Learning for Dexterous Manipulation from Single-Camera Teleoperation"
+  authors:
+  - family-names: "Qin"
+    given-names: "Yuzhe"
+  - family-names: "Huang"
+    given-names: "Binghao"
+  - family-names: "Yin"
+    given-names: "Zhao-Heng"
+  - family-names: "Su"
+    given-names: "Hao"
+  - family-names: "Wang"
+    given-names: "Xiaolong"
+  booktitle: "Robotics and Automation Letters"
+  year: 2022
+  start: 10873
+  end: 10881
+  organization: IEEE

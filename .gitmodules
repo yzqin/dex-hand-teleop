@@ -1,0 +1,3 @@
+[submodule "dexpoint-release"]
+	path = dexpoint-release
+	url = https://github.com/yzqin/dexpoint-release
