@@ -16,5 +16,5 @@ imgui.ini
 /.idea
 /log
 
-/hand_teleop/hand_detector/extra_data/
 /assets/misc/ktx/day.ktx
+/hand_detector/extra_data/
