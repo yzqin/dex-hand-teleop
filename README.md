@@ -12,18 +12,6 @@ MANO/SMPL hand format and simulatable robot model (.urdf) format
 
 ![Teaser](docs/teleop_teaser.png)
 
-## Bibtex
-
-```
-@misc{qin2022from,
-  author         = {From One Hand to Multiple Hands: Imitation Learning for Dexterous Manipulation from Single-Camera Teleoperation},
-  title          = {Qin, Yuzhe and Su, Hao and Wang, Xiaolong},
-  archivePrefix  = {arXiv},
-  year           = {2022},
-}
-
-```
-
 ## Installation
 
 ```shell
@@ -93,6 +81,16 @@ We would like to thank the following people for providing valuable feedback when
 [Ruihan Yang](https://rchalyang.github.io/), [Jianglong Ye](https://jianglongye.com/),
 [Yang Fu](https://oasisyang.github.io/), [Jiteng Mu](https://jitengmu.github.io/).
 
+## Bibtex
 
+```
+@misc{qin2022from,
+  author         = {From One Hand to Multiple Hands: Imitation Learning for Dexterous Manipulation from Single-Camera Teleoperation},
+  title          = {Qin, Yuzhe and Su, Hao and Wang, Xiaolong},
+  archivePrefix  = {arXiv},
+  year           = {2022},
+}
+
+```
 
 
