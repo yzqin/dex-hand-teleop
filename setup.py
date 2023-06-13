@@ -7,7 +7,7 @@ long_description = (root_dir / "README.md").read_text(encoding="utf-8")
 
 setup(
     name="HandTeleop",
-    version="0.4.0",
+    version="1.0.0",
     author="Yuzhe Qin",
     author_email="y1qin@ucsd.edu",
     keywords="dexterous-manipulation data-collection teleoperation",
@@ -30,5 +30,5 @@ setup(
         "smplx",
         "opencv-python",
     ],
-    extras_require={"tests": ["pytest", "black", "isort"], "meshcat": ["meshcat"]},
+    extras_require={"tests": ["pytest", "black", "isort"]},
 )
