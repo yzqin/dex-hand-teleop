@@ -71,9 +71,13 @@ hand based on SMPLX hand parameterization.
 
 2. Replay the collected demo and generate observation-action trajectory:
 
-To simply reply with demonstration without modification, i.e. visualize the saved demonstration trajectory without
-retargeting and generating anything. Run [example/simple_replay.py](example/simple_replay.py) to visualize the provided
-`example_teleop_data` for each task.
+Run [example/simple_replay.py](example/simple_replay.py) to visualize the provided
+`example_teleop_data` for each task. It simply replays the demonstration without modification, i.e. visualize the saved
+demonstration trajectory without retargeting and generating anything.
+
+Run [example/replay_generate_bc_data.py](example/replay_generate_bc_data.py) to visualize the **processed
+** `example_teleop_data` for each task. It replays the demonstration **after retargeting** and generate the state-action
+trajectory that can be consumed by imitation learning algorithms.
 
 3. Use the teleoperation system to collect some demo:
 

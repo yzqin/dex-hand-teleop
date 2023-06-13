@@ -23,7 +23,7 @@ class DataPlayer:
 
         # Human robot hand
         if zero_joint_pos is not None:
-            self.human_robot_hand = MANORobotHand(env.scene, env.renderer, init_joint_pos=zero_joint_pos, full_dof=True,
+            self.human_robot_hand = MANORobotHand(env.scene, env.renderer, init_joint_pos=zero_joint_pos,
                                                   control_interval=env.frame_skip * env.scene.get_timestep())
 
         # Generate actor id mapping
@@ -336,46 +336,3 @@ class TableDoorEnvPlayer(DataPlayer):
 
         baked_data["action"].append(baked_data["action"][-1])
         return baked_data
-
-
-def bake_demonstration_allegro_test():
-    from pathlib import Path
-
-    # Recorder
-    robot_name = "allegro_hand_xarm6_wrist_mounted_rotate2"
-    path = Path("./data/teleop/relocate-mustard_bottle/0021.pickle")
-    all_data = np.load(str(path.resolve()), allow_pickle=True)
-    meta_data = all_data["meta_data"]
-    data = all_data["data"]
-    env = RelocateRLEnv(**meta_data["env_kwargs"], robot_name=robot_name, use_gui=True)
-    player = RelocateObjectEnvPlayer(meta_data, data, env, zero_joint_pos=meta_data["zero_joint_pos"])
-    # env.robot.set_pose(sapien.Pose([0, 0, -2]))
-
-    # Retargeting
-    link_names = ["palm_center", "link_15.0_tip", "link_3.0_tip", "link_7.0_tip", "link_11.0_tip", "link_14.0",
-                  "link_2.0", "link_6.0", "link_10.0"]
-    indices = [0, 1, 2, 3, 5, 6, 7, 8]
-    joint_names = [joint.get_name() for joint in env.robot.get_active_joints()]
-    retargeting = PositionRetargeting(env.robot, joint_names, link_names, has_global_pose_limits=False,
-                                      has_joint_limits=True)
-    baked_data = player.bake_demonstration(retargeting, method="tip_middle", indices=indices)
-
-    # Visualization
-    player.scene.remove_articulation(player.human_robot_hand.robot)
-    actor_id = env.manipulated_object.get_id()
-    target_pose_vec = baked_data["target_pose"]
-    env.target_object.set_pose(sapien.Pose(target_pose_vec[:3], target_pose_vec[3:]))
-    for obs, qpos, state, action in zip(baked_data["obs"], baked_data["robot_qpos"], baked_data["state"],
-                                        baked_data["action"]):
-        env.robot.set_qpos(obs[:22])
-        # print(action[:6])
-        # print(env.reward())
-        object_pose = state["actor"][actor_id]["pose"]
-        env.manipulated_object.set_pose(sapien.Pose(object_pose[:3], object_pose[3:7]))
-
-        for _ in range(3):
-            env.render()
-
-
-if __name__ == '__main__':
-    bake_demonstration_allegro_test()

@@ -46,7 +46,7 @@ def replay(path_to_pickle: str):
 
 
 if __name__ == '__main__':
-    # example_dir = Path(__file__).parent / "example_teleop_data/relocate_tomato_soup_can.pkl"
-    # example_dir = Path(__file__).parent / "example_teleop_data/flip_mug.pkl"
-    example_dir = Path(__file__).parent / "example_teleop_data/open_door.pkl"
-    replay(str(example_dir))
+    # pkl_path = Path(__file__).parent / "example_teleop_data/relocate_tomato_soup_can.pkl"
+    # pkl_path = Path(__file__).parent / "example_teleop_data/flip_mug.pkl"
+    pkl_path = Path(__file__).parent / "example_teleop_data/open_door.pkl"
+    replay(str(pkl_path))
