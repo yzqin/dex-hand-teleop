@@ -62,14 +62,14 @@ listed below.
 - `assets`: robot and object models, and other static files
 - `example`: entry files to learn how to use the teleoperation and the customized robot hand
 
-## Quick Start
+## How to Use
 
-1. Use the `customized robot hand` proposed in the paper:
+### Use the `customized robot hand` proposed in the paper
 
 Run [example/customized_robot_hand.py](example/customized_robot_hand.py) to learn how to construct and control a robot
 hand based on SMPLX hand parameterization.
 
-2. Replay the collected demo and generate observation-action trajectory:
+### Replay the collected demo and generate observation-action trajectory
 
 Run [example/simple_replay.py](example/simple_replay.py) to visualize the provided
 `example_teleop_data` for each task. It simply replays the demonstration without modification, i.e. visualize the saved
@@ -83,7 +83,7 @@ trajectory that can be consumed by imitation learning algorithms.
 
 ![Teaser](docs/retargeting-replay.gif)
 
-3. Use the teleoperation system to collect some demo:
+### Use the teleoperation system to collect some demo
 
 Before running the teleoperation demo, make sure that your computer are connected to an iPhone and iPad, and
 the [Record3D app](https://github.com/marek-simonik/record3d) are installed on your device. I am really sorry that the
