@@ -19,7 +19,7 @@ DEFAULT_TABLE_TOP_CAMERAS = {
 
 class GUIBase:
     def __init__(self, scene: sapien.Scene, renderer: Union[sapien.VulkanRenderer, sapien.KuafuRenderer],
-                 resolution=(640, 480), window_scale=1):
+                 resolution=(640, 480), window_scale=0.5):
         use_ray_tracing = isinstance(renderer, sapien.KuafuRenderer)
         self.scene = scene
         self.renderer = renderer
@@ -103,13 +103,6 @@ class GUIBase:
                     rgb = np.flip(rgb, [-1])
                 return rgb
         raise RuntimeError(f"Camera name not found: {camera_name}")
-
-    def fetch_single_texture(self, camera_name: str, texture_name: str):
-        import cupy
-        for cam in self.cams:
-            if cam.get_name() == camera_name:
-                dlpack = cam.get_dl_tensor(texture_name)
-                return cupy.asnumpy(cupy.from_dlpack(dlpack))
 
     def render(self, render_all_views=True, additional_views: Optional[List[np.ndarray]] = None, horizontal=True):
         self.scene.update_render()

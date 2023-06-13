@@ -27,11 +27,11 @@ def main():
     if task_name == "relocate":
         task_full_name = f"relocate-{object_name}"
         env_dict = dict(frame_skip=frame_skip, object_name=object_name, object_scale=object_scale)
-    elif task_name == "table_door":
+    elif task_name == "open_door":
         task_full_name = "table_door"
         env_dict = dict(frame_skip=frame_skip)
     elif task_name == "flip":
-        task_full_name = f"flip_mug"
+        task_full_name = "flip"
         env_dict = dict(frame_skip=frame_skip)
     else:
         raise NotImplementedError
@@ -43,7 +43,7 @@ def main():
     path = Path(demo_data_root_path) / task_full_name
     path = path / f"{demo_index}.pickle"
 
-    if task_name == "table_door":
+    if task_name == "open_door":
         env = TableDoorEnv(**env_dict, use_gui=True)
     elif task_name == "relocate":
         env = RelocateEnv(**env_dict, use_gui=True)
@@ -122,6 +122,11 @@ def main():
                 gui.register_keydown_action('z', change_locked)
                 gui.register_keydown_action('x', clear_locked)
 
+                # Clear colored hand visualization during initialization
+                for i in range(len(gui.nodes)):
+                    node = gui.nodes.pop()
+                    gui.render_scene.remove_node(node)
+
             success, motion_data = motion_control.step()
             rgb = motion_data["rgb"]
 
@@ -149,9 +154,9 @@ def main():
             mano_robot.control_robot(robot_qpos, confidence=motion_data["confidence"], lock_indices=locked_indices)
 
             # Create SAPIEN mesh for rendering
-            gui.update_mesh(motion_data["vertices"], motion_data["faces"], viz_mat=viz_mat_hand_init,
-                            clear_context=True,
-                            pose=sapien.Pose(root_joint_qpos[:3] + np.array([0, -0.5, 0]) + env_init_pos))
+            # gui.update_mesh(motion_data["vertices"], motion_data["faces"], viz_mat=viz_mat_hand_init,
+            #                 clear_context=True,
+            #                 pose=sapien.Pose(root_joint_qpos[:3] + np.array([0, -0.5, 0]) + env_init_pos))
 
     print(len(recorder.data_list))
     meta_data = dict(env_class=env.__class__.__name__, env_kwargs=env_dict,

@@ -195,7 +195,7 @@ class Record3DSingleHandMotionControl:
             self.previous_offset[self.hand_mode] = offset
             hand_pose = mocap_data["pred_hand_pose"][3:] + self.hand_mocap.mean_pose
             hand_pose = np.reshape(hand_pose, [15, 3])
-            if np.linalg.norm(hand_pose, axis=1).mean() < 0.45:
+            if np.linalg.norm(hand_pose, axis=1).mean() < 0.50:
                 self.init_process += 0.02
                 self.init_root_pose_list.append(np.concatenate([offset, mocap_data["pred_hand_pose"][:3]]))
                 self.init_shape_param_list.append(mocap_data["pred_shape_params"][0])

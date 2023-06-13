@@ -29,6 +29,9 @@ setup(
         "nlopt",
         "smplx",
         "opencv-python",
+        "mediapipe",
+        "torchvision",
+        "record3d"
     ],
     extras_require={"tests": ["pytest", "black", "isort"]},
 )

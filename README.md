@@ -75,16 +75,32 @@ Run [example/simple_replay.py](example/simple_replay.py) to visualize the provid
 `example_teleop_data` for each task. It simply replays the demonstration without modification, i.e. visualize the saved
 demonstration trajectory without retargeting and generating anything.
 
-Run [example/replay_generate_bc_data.py](example/replay_generate_bc_data.py) to visualize the **processed
-** `example_teleop_data` for each task. It replays the demonstration **after retargeting** and generate the state-action
+Run [example/replay_generate_bc_data.py](example/replay_generate_bc_data.py) to visualize the **processed**
+`example_teleop_data` for each task. It replays the demonstration **after retargeting** and generate the state-action
 trajectory that can be consumed by imitation learning algorithms.
 
 3. Use the teleoperation system to collect some demo:
 
-Run [example/teleop_collect_data.py](example/teleop_collect_data.py) to learn how to utilize the teleoperation system to
-perform a manipulation data and collect the data as a pickle file.
+Before running the teleoperation demo, make sure that your computer are connected to an iPhone and iPad, and
+the [Record3D app](https://github.com/marek-simonik/record3d) are installed on your device. I am really sorry that the
+current teleoperation code requires USB connection to the iPad/IPhone, which is not a free function of this app.
+Feel free to email me if you know other IOS app that provides free camera streaming functionality.
 
-## Pipeline and Design Principle of Using Teleoperation for Imitation Learning
+Then follow the instructions in the [Record3D repo](https://github.com/marek-simonik/record3d/blob/master/demo-main.py)
+to make sure that your computer can stream the video from iPhone/iPad. You need to first successfully run the Record3D
+example before running the teleoperation demo.
+
+Next, set the parameters correctly on your Record3D app. You should use the front `FaceID` camera instead of the rear
+lidar camera. The Live RGBD Video Streaming mode should be set to `USB`. The Animation Rate (FPS) should be set to 15
+initially. You can increase FPS if your hardware is great.
+
+Run [example/teleop_collect_data.py](example/teleop_collect_data.py) to learn how to utilize the teleoperation system to
+perform a manipulation data and collect the data as a pickle file. If you can see a colored human, it means that you are
+at the stage of initialization. During initialization, you need to keep your finger spread out and flat to finish the
+initialization. Otherwise, the initialization process will be restarted again and again. Place the iPhone/iPad in a good
+position will make your teleoperation much easier, e.g. similar as Figure 3 in the paper.
+
+## Pipeline of Using Teleoperation for Imitation Learning
 
 1. Integrate a new simulation environment into `hand_teleop/env/sim_env`. This environment should include all necessary
    simulation entities, **except for the robot**. For instance, a grasping task might only require a table and an object
