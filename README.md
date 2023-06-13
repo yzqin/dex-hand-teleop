@@ -75,9 +75,13 @@ Run [example/simple_replay.py](example/simple_replay.py) to visualize the provid
 `example_teleop_data` for each task. It simply replays the demonstration without modification, i.e. visualize the saved
 demonstration trajectory without retargeting and generating anything.
 
+![Teaser](docs/simple-replay.gif)
+
 Run [example/replay_generate_bc_data.py](example/replay_generate_bc_data.py) to visualize the **processed**
 `example_teleop_data` for each task. It replays the demonstration **after retargeting** and generate the state-action
 trajectory that can be consumed by imitation learning algorithms.
+
+![Teaser](docs/retargeting-replay.gif)
 
 3. Use the teleoperation system to collect some demo:
 
