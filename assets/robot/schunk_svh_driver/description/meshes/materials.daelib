@@ -1,0 +1,224 @@
+
+<library_effects>
+  <effect id="Metall_Alu-effect">
+    <profile_COMMON>
+      <technique sid="common">
+	<phong>
+	  <emission>
+	    <color sid="emission">0 0 0 1</color>
+	  </emission>
+	  <ambient>
+	    <color sid="ambient">0.001 0.001 0.001 1</color>
+	  </ambient>
+	  <diffuse>
+	    <color sid="diffuse">0.45 0.45 0.45 1</color>
+	  </diffuse>
+	  <specular>
+	    <color sid="specular">0.65 0.65 0.65 1</color>
+	  </specular>
+	  <shininess>
+	    <float sid="shininess">70</float>
+	  </shininess>
+	  <index_of_refraction>
+	    <float sid="index_of_refraction">2</float>
+	  </index_of_refraction>
+	</phong>
+      </technique>
+      <extra>
+	<technique profile="GOOGLEEARTH">
+	  <double_sided>1</double_sided>
+	</technique>
+      </extra>
+    </profile_COMMON>
+  <extra><technique profile="MAX3D"><double_sided>1</double_sided></technique></extra>
+ </effect>
+
+  <effect id="Kunststoff_druckteile-effect">
+    <profile_COMMON>
+      <technique sid="common">
+	<lambert>
+	  <emission>
+	    <color sid="emission">0 0 0 1</color>
+	  </emission>
+	  <ambient>
+	    <color sid="ambient">0.001 0.001 0.001 1</color>
+	  </ambient>
+	  <diffuse>
+	    <color sid="diffuse">0.5 0.5 0.5 1</color>
+	  </diffuse>
+	  <index_of_refraction>
+	    <float sid="index_of_refraction">1</float>
+	  </index_of_refraction>
+	</lambert>
+      </technique>
+      <extra>
+	<technique profile="GOOGLEEARTH">
+	  <double_sided>1</double_sided>
+	</technique>
+      </extra>
+    </profile_COMMON>
+    <extra><technique profile="MAX3D"><double_sided>1</double_sided></technique></extra>
+  </effect>
+  
+<effect id="Gummi-effect">
+    <profile_COMMON>
+      <technique sid="common">
+	<phong>
+	  <emission>
+	    <color sid="emission">0 0 0 1</color>
+	  </emission>
+	  <ambient>
+	    <color sid="ambient">0.001 0.001 0.001 1</color>
+	  </ambient>
+	  <diffuse>
+	    <color sid="diffuse">0.1 0.1 0.1 1</color>
+	  </diffuse>
+	  <specular>
+	    <color sid="specular">0.05 0.05 0.05 1</color>
+	  </specular>
+	  <shininess>
+	    <float sid="shininess">50</float>
+	  </shininess>
+	  <index_of_refraction>
+	    <float sid="index_of_refraction">1</float>
+	  </index_of_refraction>
+	</phong>
+      </technique>
+      <extra>
+	<technique profile="GOOGLEEARTH">
+	  <double_sided>1</double_sided>
+	</technique>
+      </extra>
+    </profile_COMMON>
+    <extra><technique profile="MAX3D"><double_sided>1</double_sided></technique></extra>
+  </effect>
+    
+<effect id="Metall_goeldlich-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0.001 0.001 0.001 1</color>
+            </ambient>
+            <diffuse>
+              <color sid="diffuse">0.831 0.686 0.216 1</color>
+            </diffuse>
+            <specular>
+              <color sid="specular">0.15 0.15 0.15 1</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">80</float>
+            </shininess>
+            <index_of_refraction>
+              <float sid="index_of_refraction">1</float>
+            </index_of_refraction>
+          </phong>
+        </technique>
+      <extra>
+	<technique profile="GOOGLEEARTH">
+	  <double_sided>1</double_sided>
+	</technique>
+      </extra>
+      </profile_COMMON>
+<extra><technique profile="MAX3D"><double_sided>1</double_sided></technique></extra>
+    </effect>
+    
+<effect id="Metall_Daumen-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0.001 0.001 0.001 1</color>
+            </ambient>
+            <diffuse>
+              <color sid="diffuse">0.35 0.35 0.35 1</color>
+            </diffuse>
+            <specular>
+              <color sid="specular">0.2 0.2 0.2 1</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">50</float>
+            </shininess>
+            <index_of_refraction>
+              <float sid="index_of_refraction">1</float>
+            </index_of_refraction>
+          </phong>
+        </technique>
+        <extra>
+          <technique profile="GOOGLEEARTH">
+            <double_sided>1</double_sided>
+          </technique>
+        </extra>
+      </profile_COMMON>
+      <extra><technique profile="MAX3D"><double_sided>1</double_sided></technique></extra>
+    </effect>
+
+    <effect id="Kunststoff_druckschwwarz-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0.001 0.001 0.001 1</color>
+            </ambient>
+            <diffuse>
+              <color sid="diffuse">0.2 0.2 0.2 1</color>
+            </diffuse>
+	    <specular>
+              <color sid="specular">0 0 0 1</color>
+	    </specular>
+            <index_of_refraction>
+              <float sid="index_of_refraction">1</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+        <extra>
+          <technique profile="GOOGLEEARTH">
+            <double_sided>1</double_sided>
+          </technique>
+        </extra>
+      </profile_COMMON>
+      <extra><technique profile="MAX3D"><double_sided>1</double_sided></technique></extra>
+    </effect>
+
+<effect id="Kunststoff_Schwarz-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0.001 0.001 0.001 1</color>
+            </ambient>
+            <diffuse>
+              <color sid="diffuse">0.07 0.07 0.07 1</color>
+            </diffuse>
+            <specular>
+              <color sid="specular">0.05 0.05 0.05 1</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">50</float>
+            </shininess>
+            <index_of_refraction>
+              <float sid="index_of_refraction">1</float>
+            </index_of_refraction>
+          </phong>
+        </technique>
+        <extra>
+          <technique profile="GOOGLEEARTH">
+            <double_sided>1</double_sided>
+          </technique>
+        </extra>
+      </profile_COMMON>
+      <extra><technique profile="MAX3D"><double_sided>1</double_sided></technique></extra>
+    </effect>
+</library_effects>
