@@ -13,7 +13,7 @@ class RealsenseApp:
         self.stopped = False
         self.rgb_video_file = file
         self.rgb_stream, self.depth_stream, self.read_count = None, None, 0
-        self.align, self.stream, self.cam_k, self.frame = None, None, None, None
+        self.align, self.stream, self.cam_k, self.frame, self.depth_scale = None, None, None, None, 1
 
     def connect_to_device(self):
         if not os.path.exists(self.rgb_video_file):
@@ -22,7 +22,9 @@ class RealsenseApp:
             cfg.enable_stream(pyrs.stream.depth, 640, 480, pyrs.format.z16, 30)
             self.align = pyrs.align(pyrs.stream.color)
             self.stream = pyrs.pipeline()
-            cam_int = self.stream.start(cfg).get_stream(pyrs.stream.color).as_video_stream_profile().get_intrinsics()
+            dev = self.stream.start(cfg)
+            cam_int = dev.get_stream(pyrs.stream.color).as_video_stream_profile().get_intrinsics()
+            self.depth_scale = dev.get_device().first_depth_sensor().get_depth_scale()
             self.cam_k = np.array([[cam_int.fx, 0, cam_int.ppx],
                                    [0, cam_int.fy, cam_int.ppy],
                                    [0, 0, 1]])
@@ -58,7 +60,7 @@ class RealsenseApp:
         if not color or not depth:
             return
         color = np.asarray(color)
-        depth = np.asarray(depth)
+        depth = np.asarray(depth) * self.depth_scale
         return color, depth
 
     def fetch_rgb_and_depth(self):
