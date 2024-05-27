@@ -31,7 +31,8 @@ setup(
         "opencv-python",
         "mediapipe",
         "torchvision",
-        "record3d"
+        "record3d",
+        "pyrealsense2"
     ],
     extras_require={"tests": ["pytest", "black", "isort"]},
 )
