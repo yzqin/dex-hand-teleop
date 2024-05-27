@@ -13,6 +13,7 @@ import scipy.stats
 
 from hand_detector.hand_mode_detector import SingleHandDetector, HandMocap
 from hand_detector.record3d_app import CameraApp
+from hand_detector.record3d_app_realsense import RealsenseApp
 from hand_teleop.utils.mesh_utils import compute_smooth_shading_normal_np
 
 
@@ -53,6 +54,7 @@ class Record3DSingleHandMotionControl:
 
         # Camera app
         self.camera = CameraApp(file=virtual_video_file)
+        # self.camera = RealsenseApp(file=virtual_video_file)
         self.camera.connect_to_device()
         self.camera_mat = self.camera.camera_intrinsics
         self.focal_length = self.camera.camera_intrinsics[0, 0]
