@@ -144,6 +144,8 @@ hand pose detector.
 This repository employs the same code structure for simulation environment to that used
 in [DexPoint](https://github.com/yzqin/dexpoint-release).
 
+Thanks [enyen](https://github.com/enyen) for adding the RealSense support in the pull request. 
+
 ## Bibtex
 
 ```
